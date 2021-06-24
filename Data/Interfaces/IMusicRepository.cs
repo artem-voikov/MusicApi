@@ -1,12 +1,13 @@
 ﻿using Data.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
     public interface IMusicRepository
     {
-        DataAlbum GetAlbum(int id);
-        DataArtist GetArtist(int id);
-        List<DataSong> FindSong(string template);
+        Task<DataAlbum> GetAlbum(int id);
+        Task<DataArtist> GetArtist(int id);
+        Task<List<DataSong>> FindSong(string template);
     }
 }

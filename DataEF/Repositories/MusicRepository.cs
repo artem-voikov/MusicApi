@@ -2,22 +2,23 @@
 using Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace DataEF
+namespace DataEF.Repositories
 {
     public class MusicRepository : IMusicRepository
     {
-        public List<DataSong> FindSong(string template)
+        public async Task<List<DataSong>> FindSong(string template)
         {
             throw new NotImplementedException();
         }
 
-        public DataAlbum GetAlbum(int id)
+        public async Task<DataAlbum> GetAlbum(int id)
         {
             throw new NotImplementedException();
         }
 
-        public DataArtist GetArtist(int id)
+        public async Task<DataArtist> GetArtist(int id)
         {
             throw new NotImplementedException();
         }

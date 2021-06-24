@@ -2,6 +2,7 @@
 using Data.Interfaces;
 using Moq.AutoMock;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DataMocks
 {
@@ -14,7 +15,7 @@ namespace DataMocks
             mocker = new AutoMocker();
         }
 
-        public List<DataSong> FindSong(string template)
+        public async Task<List<DataSong>> FindSong(string template)
         {
             var result = new List<DataSong>();
             
@@ -24,10 +25,10 @@ namespace DataMocks
             return result;
         }
 
-        public DataAlbum GetAlbum(int id)
+        public async Task<DataAlbum> GetAlbum(int id)
             => mocker.CreateInstance<DataAlbum>();
 
-        public DataArtist GetArtist(int id)
+        public async Task<DataArtist> GetArtist(int id)
             => mocker.CreateInstance<DataArtist>();
     }
 }

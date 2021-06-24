@@ -1,16 +1,14 @@
 using AutoMapper;
-using AutoMapper.Execution;
-using Domain;
-using Domain.Mapping;
 using NUnit.Framework;
 
 namespace DomainTests
 {
-    public class Tests
+    [TestFixture]
+    public class AutomapperTests
     {
         private MapperConfiguration config;
 
-        public Tests()
+        public AutomapperTests()
         {
             config = new MapperConfiguration(cfg =>
             {
