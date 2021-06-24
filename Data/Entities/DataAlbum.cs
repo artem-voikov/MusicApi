@@ -5,10 +5,10 @@ namespace Data.Entities
 {
     public class DataAlbum
     {
+        public int AlbumId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<DataSong> Songs { get; set; }
-
         public List<DataRating> Ratings { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Licence { get; set; }

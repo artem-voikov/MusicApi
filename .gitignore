@@ -1,3 +1,5 @@
 .vs
 bin
 obj
+/DataEF/*.user
+/DataEF/*.db

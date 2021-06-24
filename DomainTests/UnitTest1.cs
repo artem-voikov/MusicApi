@@ -14,7 +14,7 @@ namespace DomainTests
         {
             config = new MapperConfiguration(cfg =>
             {
-                cfg.AddMaps(typeof(IDomainMarker));
+                cfg.AddMaps("Domain");
             });
         }
 

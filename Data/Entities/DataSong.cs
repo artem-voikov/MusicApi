@@ -5,6 +5,7 @@ namespace Data.Entities
 {
     public class DataSong
     {
+        public int SongId { get; set; }
         public string Name { get; set; }
         public string Artist { get; set; }
         public TimeSpan Time { get; set; }
