@@ -8,6 +8,6 @@ namespace Data.Interfaces
     {
         Task<DataAlbum> GetAlbum(int id);
         Task<DataArtist> GetArtist(int id);
-        Task<List<DataSong>> FindSong(string template);
+        Task<List<DataSong>> FindSongs(string template);
     }
 }

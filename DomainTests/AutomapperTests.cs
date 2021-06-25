@@ -16,13 +16,8 @@ namespace DomainTests
             });
         }
 
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void Test1()
+        public void ConfigurationTest()
         {
             config.AssertConfigurationIsValid();
         }

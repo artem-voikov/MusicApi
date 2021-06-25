@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataEF.Repositories
 {
-    public class MusicRepository : IMusicRepository
+    public class MusicEFRepository : IMusicRepository
     {
-        public async Task<List<DataSong>> FindSong(string template)
+        public async Task<List<DataSong>> FindSongs(string template)
         {
             throw new NotImplementedException();
         }

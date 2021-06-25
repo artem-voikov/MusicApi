@@ -15,7 +15,7 @@ namespace DataMocks
             mocker = new AutoMocker();
         }
 
-        public async Task<List<DataSong>> FindSong(string template)
+        public async Task<List<DataSong>> FindSongs(string template)
         {
             var result = new List<DataSong>();
             

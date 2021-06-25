@@ -1,6 +1,7 @@
 ﻿using Domain.Services;
 using DomainTests.Builders;
 using NUnit.Framework;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DomainTests
@@ -23,7 +24,7 @@ namespace DomainTests
         }
 
         [Test]
-        public async Task GetAlbum_ThrowNoError()
+        public async Task GetAlbum_ThrowsNoError()
         {
             //Arrange
             target = builder
@@ -37,5 +38,32 @@ namespace DomainTests
             Assert.IsNotNull(result.Name);
         }
 
+        [TestCase(3, "aaa bbb")]
+        [TestCase(2, "aaa")]
+        [TestCase(2, "bbb ccc")]
+        [TestCase(0, "ccc")]
+        public async Task GetSong_TemplateWithSpace_LooksForTwoSongs(int count, string template)
+        {
+            target = builder
+                .WithMusicRepository(songNames: new[] { "aaa", "aaa bbb", "bbb" })
+                .Build();
+
+            var result = await target.GetSongs(template);
+
+            Assert.AreEqual(count, result.Count);
+        }
+
+        [TestCase(50000, 3, "aaa bbb")]
+        public async Task GetSong_TemplateWithSpace_Performs(int count, int expectedCount, string template)
+        {
+            var names = Enumerable.Repeat(new[] { "aaa", "aaa bbb", "bbb" }, count).SelectMany(x => x).ToArray();
+            target = builder
+                .WithMusicRepository(songNames: names)
+                .Build();
+
+            var result = await target.GetSongs(template);
+
+            Assert.AreEqual(expectedCount, result.Count);
+        }
     }
 }

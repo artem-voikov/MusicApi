@@ -1,3 +1,4 @@
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,12 +8,15 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MusicApi
 {
     public class Startup
     {
+        public ILifetimeScope AutofacContainer { get; private set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -22,6 +26,18 @@ namespace MusicApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication8", Version = "v1" });
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            var assemblies = Assembly
+                .GetExecutingAssembly()
+                .GetReferencedAssemblies()
+                .Where(x=>x.Name.StartsWith("MusicApi"))
+                .Select(x=>Assembly.Load(x))
+                .ToArray();
+
+            builder.RegisterAssemblyModules(assemblies);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

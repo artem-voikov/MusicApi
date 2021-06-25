@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Data.Entities;
 using Data.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +41,28 @@ namespace Domain.Services
 
         public async Task<List<Song>> GetSongs(string template)
         {
-            throw new NotImplementedException();
+            var dbSongs = new ConcurrentDictionary<string, DataSong>();
+            var targets = template.Split(" ");
+            
+            
+            targets.AsParallel()
+
+                //I've done it in this way for no reason. 
+                //Just a matter of boredom
+                .ForAll(async partOfTemplate =>
+                {
+                    var response = await musicRepository.FindSongs(partOfTemplate);
+                    foreach (var song in response)
+                        if(song.Name.Contains(partOfTemplate))
+                            dbSongs.TryAdd(song.Name, song);
+                });
+
+            var songs = dbSongs
+                .Select(x => mapper.Map<Song>(x.Value))
+                .ToList();
+
+            return songs;
+
         }
     }
 }

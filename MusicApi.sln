@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi", "MusicApi\MusicApi.csproj", "{4E3ED4A2-E838-41AD-B511-2A149FCBCE27}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5DA4B760-B548-4FCE-A9B8-A5A5795053FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.Domain", "Domain\MusicApi.Domain.csproj", "{5DA4B760-B548-4FCE-A9B8-A5A5795053FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{BC0212C8-3427-4FDD-9847-0846BDA864C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.Data", "Data\MusicApi.Data.csproj", "{BC0212C8-3427-4FDD-9847-0846BDA864C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMocks", "DataMocks\DataMocks.csproj", "{C2D03863-EB5D-4007-B526-E9026F2E241A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.DataMocks", "DataMocks\MusicApi.DataMocks.csproj", "{C2D03863-EB5D-4007-B526-E9026F2E241A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEF", "DataEF\DataEF.csproj", "{85FE878A-CE0E-4EEA-8168-D0E271C05D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.DataEF", "DataEF\MusicApi.DataEF.csproj", "{85FE878A-CE0E-4EEA-8168-D0E271C05D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTests", "DomainTests\DomainTests.csproj", "{39DA264B-3DFC-42D8-B63E-E91B72F6538F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.DomainTests", "DomainTests\MusicApi.DomainTests.csproj", "{39DA264B-3DFC-42D8-B63E-E91B72F6538F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicApi.Representation", "Representation\MusicApi.Representation.csproj", "{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{39DA264B-3DFC-42D8-B63E-E91B72F6538F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DA264B-3DFC-42D8-B63E-E91B72F6538F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39DA264B-3DFC-42D8-B63E-E91B72F6538F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
