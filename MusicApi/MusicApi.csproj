@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Program.cs~RF76eaca7.TMP" />
   </ItemGroup>
@@ -24,7 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataEF\MusicApi.DataEF.csproj" />
+    <ProjectReference Include="..\DataMocks\MusicApi.DataMocks.csproj" />
     <ProjectReference Include="..\Domain\MusicApi.Domain.csproj" />
+    <ProjectReference Include="..\Representation\MusicApi.Representation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

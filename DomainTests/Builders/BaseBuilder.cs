@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace DomainTests.Builders
 {
     abstract class BaseBuilder<T>
-        where T: class
+        where T : class
     {
         private MapperConfiguration mapperConfiguration;
         protected IMapper mapper;
 
         protected BaseBuilder()
         {
-            mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps("Domain"));
+            mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps("MusicApi.Domain", "MusicApi.Representation"));
             mapper = new Mapper(mapperConfiguration);
         }
 

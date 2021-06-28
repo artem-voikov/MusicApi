@@ -6,20 +6,32 @@ namespace DomainTests
     [TestFixture]
     public class AutomapperTests
     {
-        private MapperConfiguration config;
+        private MapperConfiguration domainConfig;
+        private MapperConfiguration representationConfig;
 
         public AutomapperTests()
         {
-            config = new MapperConfiguration(cfg =>
+            domainConfig = new MapperConfiguration(cfg =>
             {
-                cfg.AddMaps("Domain");
+                cfg.AddMaps("MusicApi.Domain");
+            });
+
+            representationConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddMaps("MusicApi.Representation");
             });
         }
 
         [Test]
-        public void ConfigurationTest()
+        public void DomainMapping_ConfigurationTest()
         {
-            config.AssertConfigurationIsValid();
+            domainConfig.AssertConfigurationIsValid();
+        }
+        
+        [Test]
+        public void RepresentationMapping_ConfigurationTest()
+        {
+            domainConfig.AssertConfigurationIsValid();
         }
     }
 }

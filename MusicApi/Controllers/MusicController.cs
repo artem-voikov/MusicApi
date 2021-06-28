@@ -19,9 +19,9 @@ namespace MusicApi.Controllers
         }
         [HttpGet]
         [Route("test")]
-        public async Task<IActionResult> Test()
+        public async Task<IActionResult> Test([FromQuery] string template)
         {
-            var result = await musicService.GetSongs("aaa");
+            var result = await musicService.GetSongs(template);
             return Ok($"test search gives: {result.Count} result");
         }
 

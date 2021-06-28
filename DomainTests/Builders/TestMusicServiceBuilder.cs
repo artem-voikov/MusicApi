@@ -35,11 +35,11 @@ namespace DomainTests.Builders
                 Albums = new List<DataAlbum> { album }
             };
             var songs = songNames.Select(x => new DataSong { Name = x, Artist = artist.Name });
-            album.Songs = songs.ToList();
+            album.Songs = songs;
 
             mockMusicRepository.Setup(x => x.GetAlbum(It.IsAny<int>())).Returns(Task.FromResult(album));
             mockMusicRepository.Setup(x => x.GetArtist(It.IsAny<int>())).Returns(Task.FromResult(artist));
-            mockMusicRepository.Setup(x => x.FindSongs(It.IsAny<string>())).Returns(Task.FromResult(songs.ToList()));
+            mockMusicRepository.Setup(x => x.FindSongs(It.IsAny<string>())).Returns(Task.FromResult(songs));
             return this;
         }
     }

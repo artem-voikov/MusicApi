@@ -8,11 +8,7 @@ namespace DataEF
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var dataAccess = System.Reflection.Assembly.GetExecutingAssembly();
-
-            builder.RegisterAssemblyTypes(dataAccess)
-                   .Where(t => t.Name.EndsWith("Repository"))
-                   .AsImplementedInterfaces();
+            builder.RegisterType<MusicEFRepository>().As<IMusicRepository>();
         }
     }
 }

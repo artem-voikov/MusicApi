@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataEF\MusicApi.DataEF.csproj" />
+    <ProjectReference Include="..\DataMocks\MusicApi.DataMocks.csproj" />
     <ProjectReference Include="..\Data\MusicApi.Data.csproj" />
   </ItemGroup>
 

@@ -8,7 +8,7 @@ namespace DataEF.Repositories
 {
     public class MusicEFRepository : IMusicRepository
     {
-        public async Task<List<DataSong>> FindSongs(string template)
+        public async Task<IEnumerable<DataSong>> FindSongs(string template)
         {
             throw new NotImplementedException();
         }

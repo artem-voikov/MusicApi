@@ -1,4 +1,7 @@
 using Autofac;
+using AutoMapper;
+using DataEF;
+using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,14 +33,18 @@ namespace MusicApi
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var assemblies = Assembly
-                .GetExecutingAssembly()
-                .GetReferencedAssemblies()
-                .Where(x=>x.Name.StartsWith("MusicApi"))
-                .Select(x=>Assembly.Load(x))
-                .ToArray();
+            RegisterDataSource(builder);
+            builder.RegisterModule<DomainModule>();
+            builder.Register<IMapper>(x =>
+            {
+                var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps("MusicApi.Domain", "MusicApi.Representation"));
+                return new Mapper(mapperConfiguration);
+            });
+        }
 
-            builder.RegisterAssemblyModules(assemblies);
+        protected virtual void RegisterDataSource(ContainerBuilder builder)
+        {
+            builder.RegisterModule<DataEFModule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

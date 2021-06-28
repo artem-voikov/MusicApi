@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\MusicApi.Domain.csproj" />
+    <ProjectReference Include="..\Representation\MusicApi.Representation.csproj" />
   </ItemGroup>
 
 </Project>
