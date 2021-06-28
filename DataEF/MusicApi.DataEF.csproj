@@ -23,10 +23,4 @@
     <ProjectReference Include="..\Data\MusicApi.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="blogging.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

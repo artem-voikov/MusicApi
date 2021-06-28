@@ -1,7 +1,7 @@
-﻿using Data.Entities;
-using Data.Interfaces;
-using Domain.Services;
+﻿using Domain.Services;
 using Moq;
+using MusicApi.Data.Entities;
+using MusicApi.Data.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

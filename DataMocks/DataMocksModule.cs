@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Data.Interfaces;
+using MusicApi.Data.Interfaces;
 
 namespace DataMocks
 {

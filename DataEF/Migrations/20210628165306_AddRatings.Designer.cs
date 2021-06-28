@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataEF.Migrations
+namespace MusicApi.DataEF.Migrations
 {
     [DbContext(typeof(MusicDataContext))]
-    [Migration("20210624024857_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210628165306_AddRatings")]
+    partial class AddRatings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace DataEF.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.7");
 
-            modelBuilder.Entity("Data.Entities.DataAlbum", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataAlbum", b =>
                 {
                     b.Property<int>("AlbumId")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,28 @@ namespace DataEF.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataArtist", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataAlbumRating", b =>
+                {
+                    b.Property<int>("AlbumRating")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RatingId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AlbumRating");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("RatingId");
+
+                    b.ToTable("AlbumRatings");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataArtist", b =>
                 {
                     b.Property<int>("ArtistId")
                         .ValueGeneratedOnAdd()
@@ -78,16 +99,10 @@ namespace DataEF.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataRating", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataRating", b =>
                 {
                     b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("DataAlbumAlbumId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("DataSongSongId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("RateDate")
@@ -98,14 +113,10 @@ namespace DataEF.Migrations
 
                     b.HasKey("RatingId");
 
-                    b.HasIndex("DataAlbumAlbumId");
-
-                    b.HasIndex("DataSongSongId");
-
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataSong", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
                 {
                     b.Property<int>("SongId")
                         .ValueGeneratedOnAdd()
@@ -139,44 +150,92 @@ namespace DataEF.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataAlbum", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSongRating", b =>
                 {
-                    b.HasOne("Data.Entities.DataArtist", null)
+                    b.Property<int>("SongRatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RatingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("SongRatingId");
+
+                    b.HasIndex("RatingId");
+
+                    b.HasIndex("SongId");
+
+                    b.ToTable("SongRatings");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataAlbum", b =>
+                {
+                    b.HasOne("MusicApi.Data.Entities.DataArtist", null)
                         .WithMany("Albums")
                         .HasForeignKey("DataArtistArtistId");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataRating", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataAlbumRating", b =>
                 {
-                    b.HasOne("Data.Entities.DataAlbum", null)
+                    b.HasOne("MusicApi.Data.Entities.DataAlbum", "Album")
                         .WithMany("Ratings")
-                        .HasForeignKey("DataAlbumAlbumId");
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Data.Entities.DataSong", null)
-                        .WithMany("Ratings")
-                        .HasForeignKey("DataSongSongId");
+                    b.HasOne("MusicApi.Data.Entities.DataRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("Rating");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataSong", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
                 {
-                    b.HasOne("Data.Entities.DataAlbum", null)
+                    b.HasOne("MusicApi.Data.Entities.DataAlbum", null)
                         .WithMany("Songs")
                         .HasForeignKey("DataAlbumAlbumId");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataAlbum", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSongRating", b =>
+                {
+                    b.HasOne("MusicApi.Data.Entities.DataRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicApi.Data.Entities.DataSong", "Song")
+                        .WithMany("Ratings")
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rating");
+
+                    b.Navigation("Song");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataAlbum", b =>
                 {
                     b.Navigation("Ratings");
 
                     b.Navigation("Songs");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataArtist", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataArtist", b =>
                 {
                     b.Navigation("Albums");
                 });
 
-            modelBuilder.Entity("Data.Entities.DataSong", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
                 {
                     b.Navigation("Ratings");
                 });

@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using AutoMapper;
+using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,21 @@ namespace MusicApi.Controllers
     public class MusicController : ControllerBase
     {
         private readonly IMusicService musicService;
+        private readonly IMapper mapper;
 
-        public MusicController(IMusicService musicService)
+        public MusicController(IMusicService musicService, IMapper mapper)
         {
             this.musicService = musicService;
+            this.mapper = mapper;
         }
         [HttpGet]
         [Route("test")]
         public async Task<IActionResult> Test([FromQuery] string template)
         {
-            var result = await musicService.GetSongs(template);
-            return Ok($"test search gives: {result.Count} result");
+            var response = await musicService.GetSongs(template);
+            var result = response.Select(x => mapper.Map<VmSong>(x));
+
+            return Ok(result);
         }
 
     }

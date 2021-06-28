@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.DataEF", "DataEF\M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.DomainTests", "DomainTests\MusicApi.DomainTests.csproj", "{39DA264B-3DFC-42D8-B63E-E91B72F6538F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicApi.Representation", "Representation\MusicApi.Representation.csproj", "{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicApi.Representation", "Representation\MusicApi.Representation.csproj", "{68D16DAE-EECE-4984-80C0-EA21AC9F9D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

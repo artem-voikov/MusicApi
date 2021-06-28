@@ -1,8 +1,8 @@
-﻿using Data.Entities;
+﻿using MusicApi.Data.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data.Interfaces
+namespace MusicApi.Data.Interfaces
 {
     public interface IMusicRepository
     {

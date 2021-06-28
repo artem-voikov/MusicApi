@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Data.Interfaces;
 using DataEF.Repositories;
+using MusicApi.Data.Interfaces;
 
 namespace DataEF
 {

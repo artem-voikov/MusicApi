@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Data.Entities;
-using Data.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
+using MusicApi.Data.Entities;
+using MusicApi.Data.Interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

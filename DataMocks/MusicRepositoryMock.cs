@@ -1,5 +1,5 @@
-﻿using Data.Entities;
-using Data.Interfaces;
+﻿using MusicApi.Data.Entities;
+using MusicApi.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,14 +52,18 @@ namespace DataMocks
                 Name = name
             };
 
-        private IEnumerable<DataRating> GetRatings()
+        private IEnumerable<DataSongRating> GetRatings()
         {
             for (int i = 0; i < random.Next(5, 15); i++)
-                yield return new DataRating
+                yield return new DataSongRating
                 {
-                    RateDate = DateTime.Now.AddDays(random.Next(3, 5) * -1),
                     RatingId = i + 1,
-                    Value = random.Next(1, 10)
+                    Rating = new DataRating
+                    {
+                        RateDate = DateTime.Now.AddDays(random.Next(3, 5) * -1),
+                        RatingId = i + 1,
+                        Value = random.Next(1, 10)
+                    }
                 };
         }
 

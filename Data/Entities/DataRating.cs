@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Entities
+namespace MusicApi.Data.Entities
 {
     public class DataRating
     {

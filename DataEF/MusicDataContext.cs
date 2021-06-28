@@ -1,5 +1,5 @@
-﻿using Data.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MusicApi.Data.Entities;
 using System;
 
 namespace DataEF
@@ -10,6 +10,9 @@ namespace DataEF
         DbSet<DataArtist> Artists { get; set; }
         DbSet<DataRating> Ratings { get; set; }
         DbSet<DataSong> Songs { get; set; }
+
+        DbSet<DataSongRating> SongRatings { get; set; }
+        DbSet<DataAlbumRating> AlbumRatings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +27,6 @@ namespace DataEF
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@$"Data Source={Environment.CurrentDirectory}\blogging.db");
+            => options.UseSqlite(@$"Data Source={Environment.CurrentDirectory}\musicData.db");
     }
 }

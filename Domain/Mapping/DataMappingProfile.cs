@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using Data.Entities;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
+using MusicApi.Data.Entities;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Mapping
 {
@@ -13,10 +9,12 @@ namespace Domain.Mapping
     {
         public DataMappingProfile()
         {
-            CreateMap<DataAlbum, Album>();
+            CreateMap<DataAlbum, Album>()
+                .ForMember(d => d.Ratings, cfg => cfg.MapFrom(s => s.Ratings.Select(x => x.Rating)));
             CreateMap<DataArtist, Artist>();
             CreateMap<DataRating, Rating>();
-            CreateMap<DataSong, Song>();
+            CreateMap<DataSong, Song>()
+                .ForMember(d=>d.Ratings, cfg => cfg.MapFrom(s=>s.Ratings.Select(x=>x.Rating)));
         }
     }
 }

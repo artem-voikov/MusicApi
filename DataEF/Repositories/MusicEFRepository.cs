@@ -1,5 +1,5 @@
-﻿using Data.Entities;
-using Data.Interfaces;
+﻿using MusicApi.Data.Entities;
+using MusicApi.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

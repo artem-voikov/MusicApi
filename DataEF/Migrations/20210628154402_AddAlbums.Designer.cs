@@ -3,14 +3,16 @@ using System;
 using DataEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MusicApi.DataEF.Migrations
 {
     [DbContext(typeof(MusicDataContext))]
-    partial class MusicDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210628154402_AddAlbums")]
+    partial class AddAlbums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

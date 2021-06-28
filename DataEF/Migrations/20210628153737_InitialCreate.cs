@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DataEF.Migrations
+namespace MusicApi.DataEF.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -20,6 +20,20 @@ namespace DataEF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Artists", x => x.ArtistId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    RatingId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Value = table.Column<int>(type: "INTEGER", nullable: false),
+                    RateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.RatingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +64,32 @@ namespace DataEF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AlbumRatings",
+                columns: table => new
+                {
+                    AlbumRating = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RatingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AlbumId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlbumRatings", x => x.AlbumRating);
+                    table.ForeignKey(
+                        name: "FK_AlbumRatings_Albums_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "Albums",
+                        principalColumn: "AlbumId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AlbumRatings_Ratings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Ratings",
+                        principalColumn: "RatingId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Songs",
                 columns: table => new
                 {
@@ -75,32 +115,40 @@ namespace DataEF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ratings",
+                name: "SongRatings",
                 columns: table => new
                 {
-                    RatingId = table.Column<int>(type: "INTEGER", nullable: false)
+                    SongRatingId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Value = table.Column<int>(type: "INTEGER", nullable: false),
-                    RateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DataAlbumAlbumId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DataSongSongId = table.Column<int>(type: "INTEGER", nullable: true)
+                    RatingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SongId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ratings", x => x.RatingId);
+                    table.PrimaryKey("PK_SongRatings", x => x.SongRatingId);
                     table.ForeignKey(
-                        name: "FK_Ratings_Albums_DataAlbumAlbumId",
-                        column: x => x.DataAlbumAlbumId,
-                        principalTable: "Albums",
-                        principalColumn: "AlbumId",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_SongRatings_Ratings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Ratings",
+                        principalColumn: "RatingId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ratings_Songs_DataSongSongId",
-                        column: x => x.DataSongSongId,
+                        name: "FK_SongRatings_Songs_SongId",
+                        column: x => x.SongId,
                         principalTable: "Songs",
                         principalColumn: "SongId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlbumRatings_AlbumId",
+                table: "AlbumRatings",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlbumRatings_RatingId",
+                table: "AlbumRatings",
+                column: "RatingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Albums_DataArtistArtistId",
@@ -108,14 +156,14 @@ namespace DataEF.Migrations
                 column: "DataArtistArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_DataAlbumAlbumId",
-                table: "Ratings",
-                column: "DataAlbumAlbumId");
+                name: "IX_SongRatings_RatingId",
+                table: "SongRatings",
+                column: "RatingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_DataSongSongId",
-                table: "Ratings",
-                column: "DataSongSongId");
+                name: "IX_SongRatings_SongId",
+                table: "SongRatings",
+                column: "SongId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Songs_DataAlbumAlbumId",
@@ -125,6 +173,12 @@ namespace DataEF.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AlbumRatings");
+
+            migrationBuilder.DropTable(
+                name: "SongRatings");
+
             migrationBuilder.DropTable(
                 name: "Ratings");
 
