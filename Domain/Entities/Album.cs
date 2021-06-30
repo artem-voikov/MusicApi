@@ -5,6 +5,7 @@ namespace Domain.Entities
 {
     public class Album
     {
+        public int AlbumId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Song> Songs { get; set; }

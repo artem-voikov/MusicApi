@@ -39,17 +39,17 @@ namespace Domain.Services
             return artist;
         }
 
-        public async Task<List<Song>> GetSongs(string template)
+        public async Task<List<Song>> FindSongs(string template)
         {
             var dbSongs = new ConcurrentDictionary<string, DataSong>();
             var targets = template.Split(" ");
             
-            
-            targets.AsParallel()
-
+            targets
                 //I've done it in this way for no reason. 
                 //Just a matter of boredom
-                .ForAll(async partOfTemplate =>
+                .AsParallel().ForAll(async partOfTemplate =>
+                
+                //.ToList().ForEach(async partOfTemplate =>
                 {
                     var response = await musicRepository.FindSongs(partOfTemplate);
                     foreach (var song in response)

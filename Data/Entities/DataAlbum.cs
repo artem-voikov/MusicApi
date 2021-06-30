@@ -9,7 +9,7 @@ namespace MusicApi.Data.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<DataSong> Songs { get; set; }
-        public IEnumerable<DataAlbumRating> Ratings { get; set; }
+        public IEnumerable<DataRating> Ratings { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Licence { get; set; }
         public string Review { get; set; }

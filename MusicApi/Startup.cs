@@ -1,6 +1,5 @@
 using Autofac;
 using AutoMapper;
-using DataEF;
 using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MusicApi.DataEF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +37,8 @@ namespace MusicApi
             builder.RegisterModule<DomainModule>();
             builder.Register<IMapper>(x =>
             {
-                var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps("MusicApi.Domain", "MusicApi.Representation"));
+                var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps(
+                    "MusicApi.Domain", "MusicApi.Representation", "MusicApi.DataEF"));
                 return new Mapper(mapperConfiguration);
             });
         }

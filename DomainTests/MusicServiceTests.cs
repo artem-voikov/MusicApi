@@ -29,7 +29,7 @@ namespace DomainTests
         {
             //Arrange
             target = builder
-                .WithMusicRepository(albumName: "My test album")
+                .Default()
                 .Build();
 
             //Act
@@ -49,7 +49,7 @@ namespace DomainTests
                 .WithMusicRepository(songNames: new[] { "aaa", "aaa bbb", "bbb" })
                 .Build();
 
-            var result = await target.GetSongs(template);
+            var result = await target.FindSongs(template);
 
             Assert.AreEqual(count, result.Count);
         }
@@ -62,7 +62,7 @@ namespace DomainTests
                 .WithMusicRepository(songNames: names)
                 .Build();
 
-            var result = await target.GetSongs(template);
+            var result = await target.FindSongs(template);
 
             Assert.AreEqual(expectedCount, result.Count);
         }

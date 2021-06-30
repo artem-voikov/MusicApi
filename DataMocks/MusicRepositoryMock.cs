@@ -20,7 +20,7 @@ namespace DataMocks
         {
             random = new Random();
             dataSongs = new List<DataSong>
-            { 
+            {
                 CreateSong("Don't Go Breaking My Heart"),
                 CreateSong("Nobody Else"),
                 CreateSong("Breathe"),
@@ -52,18 +52,14 @@ namespace DataMocks
                 Name = name
             };
 
-        private IEnumerable<DataSongRating> GetRatings()
+        private IEnumerable<DataRating> GetRatings()
         {
             for (int i = 0; i < random.Next(5, 15); i++)
-                yield return new DataSongRating
+                yield return new DataRating
                 {
+                    RateDate = DateTime.Now.AddDays(random.Next(3, 5) * -1),
                     RatingId = i + 1,
-                    Rating = new DataRating
-                    {
-                        RateDate = DateTime.Now.AddDays(random.Next(3, 5) * -1),
-                        RatingId = i + 1,
-                        Value = random.Next(1, 10)
-                    }
+                    Value = random.Next(1, 10)
                 };
         }
 

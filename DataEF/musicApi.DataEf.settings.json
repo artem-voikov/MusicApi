@@ -1,0 +1,5 @@
+{
+  "connectionStrings": {
+    "default": "C:\\Users\\admin\\source\\repos\\MusicApi\\MusicApi\\bin\\Debug\\net5.0\\musicData.db"
+  }
+}

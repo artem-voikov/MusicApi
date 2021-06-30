@@ -8,6 +8,6 @@ namespace Domain.Interfaces
     {
         Task<Album> GetAlbum(int id);
         Task<Artist> GetArtist(int id);
-        Task<List<Song>> GetSongs(string template);
+        Task<List<Song>> FindSongs(string template);
     }
 }

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Entities
+namespace MusicApi.Data.Entities
 {
-    public class VmAlbum
+    public class DataEfAlbum
     {
+        [Key]
         public int AlbumId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<VmSong> Songs { get; set; }
-
-        public int Popularity { get; set; }
-        public int VotersCount { get; set; }
+        public IEnumerable<DataSong> Songs { get; set; }
+        public IEnumerable<DataAlbumRating> Ratings { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Licence { get; set; }
         public string Review { get; set; }

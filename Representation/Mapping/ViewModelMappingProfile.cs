@@ -18,7 +18,9 @@ namespace MusicApi.Mapping
             CreateMap<Rating, VmRating>();
             CreateMap<Song, VmSong>()
                 .ForMember(d => d.Time, cfg => cfg.MapFrom(s => s.Time.ToString(@"mm\:ss")))
-                .ForMember(d => d.Popularity, cfg => cfg.MapFrom(s => customFieldMapper.MapRatings(s.Ratings)));
+                .ForMember(d => d.Popularity, cfg => cfg.MapFrom(s => s.Ratings.Count > 0
+                                                                            ? customFieldMapper.MapRatings(s.Ratings)
+                                                                            : s.Popularity));
         }
     }
 }

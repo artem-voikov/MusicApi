@@ -8,6 +8,7 @@ namespace DomainTests
     {
         private MapperConfiguration domainConfig;
         private MapperConfiguration representationConfig;
+        private MapperConfiguration dataEfConfig;
 
         public AutomapperTests()
         {
@@ -20,6 +21,11 @@ namespace DomainTests
             {
                 cfg.AddMaps("MusicApi.Representation");
             });
+
+            dataEfConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddMaps("MusicApi.DataEF");
+            });
         }
 
         [Test]
@@ -29,9 +35,15 @@ namespace DomainTests
         }
         
         [Test]
+        public void DataEfMapping_ConfigurationTest()
+        {
+            dataEfConfig.AssertConfigurationIsValid();
+        }
+        
+        [Test]
         public void RepresentationMapping_ConfigurationTest()
         {
-            domainConfig.AssertConfigurationIsValid();
+            representationConfig.AssertConfigurationIsValid();
         }
     }
 }
