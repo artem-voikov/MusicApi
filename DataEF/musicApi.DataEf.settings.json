@@ -1,0 +1,5 @@
+{
+  "connectionStrings": {
+    "default": "Data Source=C:\\musicData.db"
+  }
+}
