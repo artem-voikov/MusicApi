@@ -1,5 +1,5 @@
 # MusicApi
-The main goal is to display the code which could be delivered by me. In this particular example I've created a simple API with three separate layers: Representation, Domain and Data. They are all could be evolve separatelly and allow to be enhanced in various ways. 
+The main goal of this project is to display the code which could be delivered by me. In this particular example I've created a simple API with three separate layers: Representation, Domain and Data. They are all could be evolve separatelly and allow to be enhanced in various ways. 
 
 Representation 
 consists of two projects: MusicApi.Representation and MusicApi. MusicApi.Representation is having interfaces, view models and mapping profile to map domain objects to view model objects. MusicApi purpose solely to interprete the incomming requests, handover it to domain services and interprete the response into a view model. MusicApi also is a startup project, so it will contain setup preferences: IoC initialization, appsettings etc. 
