@@ -16,6 +16,6 @@ consists of three projects: MusicApi.Data, MusicApi.DataEF and MusicApi.DataMock
 - use MusicApi.DataMocks in unit tests. it will helps to display various usecases
 - add unit tests which will covers mapping strategies and possible issues
 - change the columns, entities names, constraints etc in more pleasent way in ef.
-- add completelly different data source such as LastFM and map responses to Data. it will requires instantination of environment variables for the secrets or vault
-- add elastic search as log target. elastic search is far more superior, especially with text search than plain text .log file
-- add some CMS for the settings and/or content, for example Episerver to have it as example of a flexible solution design
+- add completely different data source such as LastFM and map responses to Data. it will require instantiation of environment variables for the secrets or vault
+- add elastic search as log target. elastic search is far more superior, especially with text search, than plain text .log file
+- add some CMS for the settings and/or content/titles, for example Episerver. This will display how flexible this solution design is. 
