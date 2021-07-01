@@ -1,7 +1,3 @@
-# Start
-1. Use install.bat in the root.
-2. Open https://localhost:5001/swagger/index.html
-
 # MusicApi
 The main goal of this project is to display the code which could be delivered by me. In this particular example I've created a simple API with three separate layers: Representation, Domain and Data. They are all could be evolve separatelly and allow to be enhanced in various ways. 
 
@@ -24,5 +20,8 @@ consists of three projects: MusicApi.Data, MusicApi.DataEF and MusicApi.DataMock
 - add elastic search as log target. elastic search is far more superior, especially with text search, than plain text .log file
 - add some CMS for the settings and/or content/titles, for example Episerver. This will display how flexible this solution design is. 
 
+# Start
+1. Use install.bat in the root.
+2. Open https://localhost:5001/swagger/index.html
 
 task description: https://i.imgur.com/LIDSsni.jpg
