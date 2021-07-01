@@ -19,3 +19,6 @@ consists of three projects: MusicApi.Data, MusicApi.DataEF and MusicApi.DataMock
 - add completely different data source such as LastFM and map responses to Data. it will require instantiation of environment variables for the secrets or vault
 - add elastic search as log target. elastic search is far more superior, especially with text search, than plain text .log file
 - add some CMS for the settings and/or content/titles, for example Episerver. This will display how flexible this solution design is. 
+
+
+task description: https://i.imgur.com/LIDSsni.jpg
