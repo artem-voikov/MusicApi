@@ -1,3 +1,7 @@
+# Start
+1. Use install.bat in the root.
+2. Open https://localhost:5001/swagger/index.html
+
 # MusicApi
 The main goal of this project is to display the code which could be delivered by me. In this particular example I've created a simple API with three separate layers: Representation, Domain and Data. They are all could be evolve separatelly and allow to be enhanced in various ways. 
 
