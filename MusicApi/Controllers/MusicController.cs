@@ -39,6 +39,16 @@ namespace MusicApi.Controllers
             var result = mapper.Map<VmAlbum>(response);
 
             return Ok(result);
+        } 
+        
+        [HttpGet]
+        [Route("album/{id}/songs")]
+        public async Task<IActionResult> GetAlbumSongs(int id)
+        {
+            var response = await musicService.GetAlbumSongs(id);
+            var result = response.Select(x => mapper.Map<VmSong>(x));
+
+            return Ok(result);
         }
         
         [HttpGet]
@@ -47,6 +57,16 @@ namespace MusicApi.Controllers
         {
             var response = await musicService.GetArtist(id);
             var result = mapper.Map<VmArtist>(response);
+
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [Route("artist/{id}/albums")]
+        public async Task<IActionResult> GetArtistAlbums(int id)
+        {
+            var response = await musicService.GetArtistAlbums(id);
+            var result = response.Select(x => mapper.Map<VmAlbum>(x));
 
             return Ok(result);
         }

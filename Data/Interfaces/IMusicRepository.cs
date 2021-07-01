@@ -9,5 +9,7 @@ namespace MusicApi.Data.Interfaces
         Task<DataAlbum> GetAlbum(int id);
         Task<DataArtist> GetArtist(int id);
         Task<IEnumerable<DataSong>> FindSongs(string template);
+        Task<IEnumerable<DataSong>> GetAlbumSongs(int id);
+        Task<IEnumerable<DataAlbum>> GetArtistAlbums(int id);
     }
 }

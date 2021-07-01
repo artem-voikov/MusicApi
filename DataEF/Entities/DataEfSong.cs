@@ -15,5 +15,7 @@ namespace MusicApi.Data.Entities
         public decimal Price { get; set; }
         public string Genre { get; set; }
         public List<DataSongRating> Ratings { get; set; }
+        public int DataAlbumAlbumId { get; set; }
+
     }
 }

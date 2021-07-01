@@ -71,5 +71,11 @@ namespace DataMocks
 
         public Task<DataArtist> GetArtist(int id)
             => Task.FromResult(dataArtist);
+
+        public Task<IEnumerable<DataSong>> GetAlbumSongs(int id)
+            => Task.FromResult(dataSongs.AsEnumerable());
+
+        public Task<IEnumerable<DataAlbum>> GetArtistAlbums(int id)
+            => Task.FromResult(new DataAlbum[] { dataAlbum }.AsEnumerable());
     }
 }

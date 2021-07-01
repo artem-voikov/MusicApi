@@ -3,10 +3,6 @@ using Domain.Interfaces;
 using Domain.Services;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DomainTests
 {
@@ -22,7 +18,25 @@ namespace DomainTests
             target = new CustomFieldMapperService();
         }
 
-        [TestCase]
+        [Test]
+        public void MapRatings_ZeroRatings_Zero()
+        {
+            var ratings = new Rating[0];
+
+            var result = target.MapRatings(ratings);
+
+            Assert.AreEqual(0, result);
+        } 
+        
+        [Test]
+        public void MapRatings_NoRatings_Zero()
+        {
+            var result = target.MapRatings(null);
+
+            Assert.AreEqual(0, result);
+        }
+        
+        [Test]
         public void MapRatings_ValidRatings_GivesAverageRating()
         {
             //Arrange

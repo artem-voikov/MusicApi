@@ -18,5 +18,6 @@ namespace MusicApi.Data.Entities
         public decimal Price { get; set; }
         public string Image { get; set; }
         public string Genre { get; set; }
+        public int DataArtistArtistId { get; set; }
     }
 }

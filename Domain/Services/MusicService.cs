@@ -48,8 +48,6 @@ namespace Domain.Services
                 //I've done it in this way for no reason. 
                 //Just a matter of boredom
                 .AsParallel().ForAll(async partOfTemplate =>
-                
-                //.ToList().ForEach(async partOfTemplate =>
                 {
                     var response = await musicRepository.FindSongs(partOfTemplate);
                     foreach (var song in response)
@@ -63,6 +61,22 @@ namespace Domain.Services
 
             return songs;
 
+        }
+
+        public async Task<List<Song>> GetAlbumSongs(int id)
+        {
+            var dbSongs = await musicRepository.GetAlbumSongs(id);
+            var result = dbSongs.Select(x => mapper.Map<Song>(x));
+
+            return result.ToList();
+        }
+
+        public async Task<List<Album>> GetArtistAlbums(int id)
+        {
+            var dbSongs = await musicRepository.GetArtistAlbums(id);
+            var result = dbSongs.Select(x => mapper.Map<Album>(x));
+
+            return result.ToList();
         }
     }
 }

@@ -7,13 +7,15 @@ namespace MusicApi.DataEF.Infrastructure
 {
     public class DataEfContext : DbContext
     {
-        private readonly DataEfSettings dataEfSettings;
+        private readonly string connectionString;
 
-        public DataEfContext(DataEfSettings dataEfSettings)
+        public DataEfContext()
         {
-            this.dataEfSettings = dataEfSettings;
-        }
+            IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("musicApi.DataEf.settings.json").Build();
 
+            connectionString = configuration["connectionStrings:default"];
+        }
+        
         public DbSet<DataEfAlbum> Albums { get; set; }
         public DbSet<DataArtist> Artists { get; set; }
         public DbSet<DataRating> Ratings { get; set; }
@@ -34,6 +36,6 @@ namespace MusicApi.DataEF.Infrastructure
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@$"Data Source={dataEfSettings.Default}");
+            => options.UseSqlite(connectionString);
     }
 }

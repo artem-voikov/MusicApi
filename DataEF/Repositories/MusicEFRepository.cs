@@ -37,11 +37,25 @@ namespace DataEF.Repositories
             return mapper.Map<DataAlbum>(result);
         }
 
+        public async Task<IEnumerable<DataSong>> GetAlbumSongs(int id)
+        {
+            var result = await context.Songs.Where(x => x.DataAlbumAlbumId == id).ToListAsync();
+
+            return result.Select(x => mapper.Map<DataSong>(x));
+        }
+
         public async Task<DataArtist> GetArtist(int id)
         {
             var result = await context.Artists.FirstOrDefaultAsync(x => x.ArtistId == id);
 
             return result;
+        }
+
+        public async Task<IEnumerable<DataAlbum>> GetArtistAlbums(int id)
+        {
+            var result = await context.Albums.Where(x => x.DataArtistArtistId == id).ToListAsync();
+
+            return result.Select(x => mapper.Map<DataAlbum>(x));
         }
     }
 }

@@ -53,24 +53,29 @@ namespace MusicApi.DataEF.Migrations
 
                     b.HasIndex("DataArtistArtistId");
 
-                    b.ToTable("Albums");
+                    b.ToTable("DataAlbum");
                 });
 
             modelBuilder.Entity("MusicApi.Data.Entities.DataAlbumRating", b =>
                 {
-                    b.Property<int>("AlbumRating")
+                    b.Property<int>("AlbumRatingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("DataEfAlbumAlbumId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("RatingId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("AlbumRating");
+                    b.HasKey("AlbumRatingId");
 
                     b.HasIndex("AlbumId");
+
+                    b.HasIndex("DataEfAlbumAlbumId");
 
                     b.HasIndex("RatingId");
 
@@ -97,10 +102,80 @@ namespace MusicApi.DataEF.Migrations
                     b.ToTable("Artists");
                 });
 
+            modelBuilder.Entity("MusicApi.Data.Entities.DataEfAlbum", b =>
+                {
+                    b.Property<int>("AlbumId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Licence")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Review")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AlbumId");
+
+                    b.ToTable("Albums");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataEfSong", b =>
+                {
+                    b.Property<int>("SongId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Artist")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Popularity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SongId");
+
+                    b.ToTable("Songs");
+                });
+
             modelBuilder.Entity("MusicApi.Data.Entities.DataRating", b =>
                 {
                     b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DataAlbumAlbumId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DataSongSongId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("RateDate")
@@ -111,6 +186,10 @@ namespace MusicApi.DataEF.Migrations
 
                     b.HasKey("RatingId");
 
+                    b.HasIndex("DataAlbumAlbumId");
+
+                    b.HasIndex("DataSongSongId");
+
                     b.ToTable("Ratings");
                 });
 
@@ -120,10 +199,13 @@ namespace MusicApi.DataEF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Artist")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DataAlbumAlbumId")
+                    b.Property<int?>("DataEfAlbumAlbumId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Genre")
@@ -143,15 +225,20 @@ namespace MusicApi.DataEF.Migrations
 
                     b.HasKey("SongId");
 
-                    b.HasIndex("DataAlbumAlbumId");
+                    b.HasIndex("AlbumId");
 
-                    b.ToTable("Songs");
+                    b.HasIndex("DataEfAlbumAlbumId");
+
+                    b.ToTable("DataSong");
                 });
 
             modelBuilder.Entity("MusicApi.Data.Entities.DataSongRating", b =>
                 {
                     b.Property<int>("SongRatingId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("DataEfSongSongId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RatingId")
@@ -161,6 +248,8 @@ namespace MusicApi.DataEF.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("SongRatingId");
+
+                    b.HasIndex("DataEfSongSongId");
 
                     b.HasIndex("RatingId");
 
@@ -179,10 +268,14 @@ namespace MusicApi.DataEF.Migrations
             modelBuilder.Entity("MusicApi.Data.Entities.DataAlbumRating", b =>
                 {
                     b.HasOne("MusicApi.Data.Entities.DataAlbum", "Album")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MusicApi.Data.Entities.DataEfAlbum", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("DataEfAlbumAlbumId");
 
                     b.HasOne("MusicApi.Data.Entities.DataRating", "Rating")
                         .WithMany()
@@ -195,15 +288,36 @@ namespace MusicApi.DataEF.Migrations
                     b.Navigation("Rating");
                 });
 
-            modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
+            modelBuilder.Entity("MusicApi.Data.Entities.DataRating", b =>
                 {
                     b.HasOne("MusicApi.Data.Entities.DataAlbum", null)
-                        .WithMany("Songs")
+                        .WithMany("Ratings")
                         .HasForeignKey("DataAlbumAlbumId");
+
+                    b.HasOne("MusicApi.Data.Entities.DataSong", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("DataSongSongId");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
+                {
+                    b.HasOne("MusicApi.Data.Entities.DataAlbum", "Album")
+                        .WithMany("Songs")
+                        .HasForeignKey("AlbumId");
+
+                    b.HasOne("MusicApi.Data.Entities.DataEfAlbum", null)
+                        .WithMany("Songs")
+                        .HasForeignKey("DataEfAlbumAlbumId");
+
+                    b.Navigation("Album");
                 });
 
             modelBuilder.Entity("MusicApi.Data.Entities.DataSongRating", b =>
                 {
+                    b.HasOne("MusicApi.Data.Entities.DataEfSong", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("DataEfSongSongId");
+
                     b.HasOne("MusicApi.Data.Entities.DataRating", "Rating")
                         .WithMany()
                         .HasForeignKey("RatingId")
@@ -211,7 +325,7 @@ namespace MusicApi.DataEF.Migrations
                         .IsRequired();
 
                     b.HasOne("MusicApi.Data.Entities.DataSong", "Song")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -231,6 +345,18 @@ namespace MusicApi.DataEF.Migrations
             modelBuilder.Entity("MusicApi.Data.Entities.DataArtist", b =>
                 {
                     b.Navigation("Albums");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataEfAlbum", b =>
+                {
+                    b.Navigation("Ratings");
+
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("MusicApi.Data.Entities.DataEfSong", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("MusicApi.Data.Entities.DataSong", b =>
